@@ -1,0 +1,25 @@
+{
+  "name": "samrun0.github.io",
+  "version": "1.0.0",
+  "description": "ion 3D Engine Website",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon ./index.js localhost 5000",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/samrun0/samrun0.github.io.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/samrun0/samrun0.github.io/issues"
+  },
+  "homepage": "https://github.com/samrun0/samrun0.github.io#readme",
+  "dependencies": {
+    "express": "^4.18.2",
+    "nodemon": "^2.0.21"
+  }
+}
