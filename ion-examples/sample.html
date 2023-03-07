@@ -7,17 +7,14 @@
         <meta name="keywords" content="ion, engine, 3D, three.js, ui, user-interface, vr, ar, virtual reality, webXR">
         <meta name="description" content="ION 3D Engine Example"/>
 
-
-        <!-- https://unpkg.com/ion-3d-engine -->
+        <script src="https://unpkg.com/three"></script>
+        <script src="https://unpkg.com/ion-3d-engine"></script>
 
     </head>
 
     <body>
 
     <canvas id="viewport"></canvas>
-
-
-    <div>test 2</div>
 
     <div id='sample' style="width: 400px; height: 250px;">
         <h2>The Sample Element</h2>
@@ -60,12 +57,16 @@
 
 <script type="module">
 
+import * as ION from 'ion-3d-engine';
+
+console.log(ION);
+
+// window.addEventListener('load', () => {
+
+    
+// });
 
 
-
-window.addEventListener('load', () => {
-
-});
 </script>
 
     </body>
