@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>ION 3D Engine Example</title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="keywords" content="ion, engine, 3D, three.js, ui, user-interface, vr, ar, virtual reality, webXR">
+        <meta name="description" content="ION 3D Engine Example"/>
+
+        <!-- Since import maps are not yet supported by all browsers, it is necessary to add the polyfill es-module-shims.js. -->
+        <script async src="https://unpkg.com/es-module-shims@1.6.3/dist/es-module-shims.js"></script>
+        <script type="importmap">
+            {
+                "imports": { 
+                    "three": "https://unpkg.com/three@0.150.1/build/three.module.js",
+                    "ion-3d-engine": "https://unpkg.com/ion-3d-engine/dist/ion-3d-engine.module.js"
+                }
+            } 
+        </script>
+
+        <!-- simple-keyboard  -->
+        <link crossorigin="anonymous" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/simple-keyboard@latest/build/css/index.css">
+        <script src="https://cdn.jsdelivr.net/npm/simple-keyboard@latest/build/index.js"></script>
+        
+    </head>
+
+    <body>
+
+    
+    <canvas id="viewport"></canvas>
+
+    
+    <!-- keyboard GUI Component  -->
+    <input class="keyboard-input" placeholder="Tap on the virtual keyboard to start" />
+    <div class="simple-keyboard"></div>
+
+
+<script type="module">
+
+    import ION from 'ion-3d-engine';
+
+
+    /* Engine: */
+    const canvas = document.getElementById('viewport');
+    const engine = new ION.Engine({
+        canvas: canvas,
+        fullScreen: true,
+        control: ION.SpaceControl,
+        stats: true,
+        vrEnabled: true,
+    });
+
+    /* simple-keyboard: */
+    // For more info checkout the documentation: https://hodgef.com/simple-keyboard/getting-started/
+
+    let Keyboard = window.SimpleKeyboard.default;
+
+    let keyboard = new Keyboard({
+        onChange: input => onChange(input),
+        onKeyPress: button => onKeyPress(button),
+        theme: "hg-theme-default hg-theme-ios",
+        layout: {
+            default: [
+                "q w e r t y u i o p {bksp}",
+                "a s d f g h j k l {enter}",
+                "{shift} z x c v b n m , . {shift}",
+                "{alt} {smileys} {space} {altright} {downkeyboard}"
+            ],
+            shift: [
+                "Q W E R T Y U I O P {bksp}",
+                "A S D F G H J K L {enter}",
+                "{shiftactivated} Z X C V B N M , . {shiftactivated}",
+                "{alt} {smileys} {space} {altright} {downkeyboard}"
+            ],
+            alt: [
+                "1 2 3 4 5 6 7 8 9 0 {bksp}",
+                `@ # $ & * ( ) ' " {enter}`,
+                "{shift} % - + = / ; : ! ? {shift}",
+                "{default} {smileys} {space} {back} {downkeyboard}"
+            ],
+            smileys: [
+                "😀 😊 😅 😂 🙂 😉 😍 😛 😠 😎 {bksp}",
+                `😏 😬 😭 😓 😱 😪 😬 😴 😯 {enter}`,
+                "😐 😇 🤣 😘 😚 😆 😡 😥 😓 🙄 {shift}",
+                "{default} {smileys} {space} {altright} {downkeyboard}"
+            ]
+        },
+        display: {
+            "{alt}": ".?123",
+            "{smileys}": "\uD83D\uDE03",
+            "{shift}": "⇧",
+            "{shiftactivated}": "⇧",
+            "{enter}": "return",
+            "{bksp}": "⌫",
+            "{altright}": ".?123",
+            "{downkeyboard}": "🞃",
+            "{space}": " ",
+            "{default}": "ABC",
+            "{back}": "⇦"
+        }
+        });
+
+        /**
+         * Update simple-keyboard when input is changed directly
+         */
+        document.querySelector(".keyboard-input").addEventListener("input", event => {
+        keyboard.setInput(event.target.value);
+    });
+
+
+    function onChange(input) {
+        console.log("Input changed", input);
+        document.querySelector(".keyboard-input").value = input;
+        // Or: document.querySelector(".keyboard-input").setAttribute('value', input);
+    }
+
+    function onKeyPress(button) {
+        console.log("Button pressed", button);
+
+        /**
+         * Handle toggles
+         */
+        if (button.includes("{") && button.includes("}")) {
+            handleLayoutChange(button);
+        }
+    }
+
+    function handleLayoutChange(button) {
+        let currentLayout = keyboard.options.layoutName;
+        let layoutName;
+
+        switch (button) {
+            case "{shift}":
+            case "{shiftactivated}":
+            case "{default}":
+                layoutName = currentLayout === "default" ? "shift" : "default";
+                break;
+
+            case "{alt}":
+            case "{altright}":
+                layoutName = currentLayout === "alt" ? "default" : "alt";
+                break;
+
+            case "{smileys}":
+                layoutName = currentLayout === "smileys" ? "default" : "smileys";
+                break;
+
+            default:
+                break;
+        }
+
+        if (layoutName) {
+            keyboard.setOptions({
+                layoutName: layoutName
+            });
+        }
+    }
+
+    /* Customizing keyboard styling: */
+    keyboard.addButtonTheme(
+        "\` ` 1 2 3 4 5 6 7 8 9 0 - = {bksp} {tab} q w e r t y u i o p [ ] \\ {lock} a s d f g h j k l ; ' " 
+        + '{enter} {shift} z x c v b n m , . / {shift} .com @ {space} ~ ! @ # $ % ^ & * ( ) _ + {bksp} {tab} Q W E R T Y U I O P { } | {lock} A S D F G H J K L : " {enter} {shift} Z X C V B N M < > ? {shift} .com @ {space}'
+        + " 😀 😊 😅 😂 🙂 😉 😍 😛 😠 😎 "
+        + " 😏 😬 😭 😓 😱 😪 😬 😴 😯 "
+        + " 😐 😇 🤣 😘 😚 😆 😡 😥 😓 🙄 ",
+        'customKeyboardBtnClass'
+    );
+    keyboard.addButtonTheme(
+        "{default} {alt} {smileys} {altright} {downkeyboard} {shiftactivated} {back}",
+        'customKeyboardBtnClass1'
+    );
+
+
+
+    const simpleKeyboardElm = document.getElementsByClassName('simple-keyboard')[0];
+    const simpleKeyboardComp = new ION.GUIComponent({
+        rootElement: simpleKeyboardElm,
+        ratio: 0.5,
+        transparent: true,
+    });
+    simpleKeyboardComp.position.set(0, 3, 0);
+    simpleKeyboardComp.rotateX(-0.4);
+
+    /* Entity */
+    let simpleKeyboardEntity = new ION.Entity();
+    simpleKeyboardEntity.addComponent(simpleKeyboardComp);
+    engine.addEntity(simpleKeyboardEntity);
+
+
+
+    const keyboardInputElm = document.getElementsByClassName('keyboard-input')[0];
+    const keyboardInputComp = new ION.GUIComponent({
+        rootElement: keyboardInputElm,
+        ratio: 0.5,
+        transparent: true,
+    });
+    keyboardInputComp.position.set(0, 4, -0.25);
+
+    /* Entity */
+    let keyboardInputEntity = new ION.Entity();
+    keyboardInputEntity.addComponent(keyboardInputComp);
+    engine.addEntity(keyboardInputEntity);
+
+    /* System */
+    const guiSystem = new ION.GUISystem();
+    engine.addSystem(guiSystem);
+
+
+    /* Changing the Camera position: */
+    engine.camera.position.z = 5;
+    engine.camera.position.y = 3.5;
+
+
+    /* Engine Start */
+    engine.start();
+
+</script>
+
+
+<style>
+
+    .keyboard-input {
+        width: 800px;
+        height: 90px;
+        padding: 15px;
+        padding-left: 23px;
+        font-size: 21px;
+        border: none;
+        box-sizing: border-box;
+        background: #2f2f2f;
+        color: white;
+    }
+
+    /**
+    * hg-theme-default theme
+    */
+    .simple-keyboard.hg-theme-ios {
+        width: 750px;
+        margin: auto;
+    }
+    .simple-keyboard.hg-theme-ios.hg-theme-default .hg-row .hg-button {
+        flex-grow: 1;
+        cursor: pointer;
+        max-width: initial;
+    }
+    .simple-keyboard.hg-theme-ios .hg-row {
+        display: flex;
+    }
+    .simple-keyboard.hg-theme-ios .hg-row:not(:last-child) {
+        margin-bottom: 5px;
+    }
+    .simple-keyboard.hg-theme-ios .hg-row .hg-button:not(:last-child) {
+        margin-right: 5px;
+    }
+    .simple-keyboard.hg-theme-ios .hg-row:nth-child(2) {
+        margin-left: 18px;
+    }
+    .simple-keyboard.hg-theme-ios.hg-theme-default {
+        background-color: rgba(103, 103, 103, 0.8);
+        padding: 5px;
+        border-radius: 5px;
+    }
+    .simple-keyboard.hg-theme-ios.hg-theme-default.hg-layout-custom {
+        background-color: #e5e5e5;
+        padding: 5px;
+    }
+    .simple-keyboard.hg-theme-ios.hg-theme-default .hg-button {
+        border-radius: 5px;
+        box-sizing: border-box;
+        padding: 0;
+        background: white;
+        border-bottom: 1px solid #686868;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: none;
+        font-weight: 400;
+        font-size: 20px;
+        max-width: 60px;
+        min-width: 60px;
+        height: 60px;
+        min-height: 60px;
+    }
+    .simple-keyboard.hg-theme-ios.hg-theme-default .hg-button:active,
+    .simple-keyboard.hg-theme-ios.hg-theme-default .hg-button:focus {
+        background: #e4e4e4;
+    }
+    .simple-keyboard.hg-theme-ios.hg-theme-default .hg-button.hg-functionBtn {
+        background-color: #adb5bb;
+    }
+    .simple-keyboard.hg-theme-ios.hg-theme-default .hg-button.hg-button-space,
+    .simple-keyboard.hg-theme-ios.hg-theme-default .hg-button.hg-button-shift,
+    .simple-keyboard.hg-theme-ios.hg-theme-default
+        .hg-button.hg-button-shiftactivated {
+        background-color: #ffffff;
+    }
+    .simple-keyboard.hg-theme-ios.hg-theme-default .hg-button-space {
+        max-width: 448px;
+        min-width: 448px;
+    }
+    .simple-keyboard.hg-theme-ios.hg-theme-default .hg-button-enter {
+        max-width: 110px;
+        min-width: 110px;
+    }
+    .simple-keyboard.hg-theme-ios.hg-theme-default .hg-button-altright,
+    .simple-keyboard.hg-theme-ios.hg-theme-default .hg-button-back {
+        min-width: 80px;
+        max-width: 80px;
+    }
+
+
+    /**
+    * Custom keybaord design:
+    */
+    .customKeyboardBtnClass {
+        background-color: #2f2f2f !important;
+        color: white;
+        font-weight: 100 !important;
+    }
+
+    .customKeyboardBtnClass:hover {
+        background-color: #171717 !important;
+        transition-duration: all 600ms;
+    }
+
+    .customKeyboardBtnClass1{
+        background-color: #2f2f2f !important;
+        color: white;
+    }
+    .customKeyboardBtnClass1:hover {
+        background-color: #171717 !important;
+        transition-duration: all 600ms;
+    }
+
+</style>
+
+
+    </body>
+</html>

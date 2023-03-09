@@ -68,13 +68,14 @@
 
     import ION from 'ion-3d-engine';
 
+    
     /* Engine: */
     const canvas = document.getElementById('viewport');
     const engine = new ION.Engine({
         canvas: canvas,
         fullScreen: true,
         control: ION.SpaceControl,
-        // stats: false,
+        stats: true,
         vrEnabled: true,
     });
 
