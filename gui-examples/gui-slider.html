@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>ION 3D Engine Example</title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="keywords" content="ion, engine, 3D, three.js, ui, user-interface, vr, ar, virtual reality, webXR">
+        <meta name="description" content="ION 3D Engine Example"/>
+
+        <!-- Since import maps are not yet supported by all browsers, it is necessary to add the polyfill es-module-shims.js. -->
+        <script async src="https://unpkg.com/es-module-shims@1.6.3/dist/es-module-shims.js"></script>
+        <script type="importmap">
+            {
+                "imports": { 
+                    "three": "https://unpkg.com/three@0.150.1/build/three.module.js",
+                    "ion-3d-engine": "https://unpkg.com/ion-3d-engine/dist/ion-3d-engine.module.js"
+                }
+            } 
+        </script>
+
+    </head>
+
+    <body>
+
+    <canvas id="viewport"></canvas>
+
+    
+    <!-- Slider container -->
+    <div class="slider">
+        <!-- slide 1 -->
+        <div class="slide">
+        <img src="/gui-examples/assets/images/test_image_1.jpeg" alt="Test Image 1" />
+        </div>
+
+        <!-- slide 2 -->
+        <div class="slide">
+        <img src="/gui-examples/assets/images/test_image_2.jpeg" alt="Test Image 2" />
+        </div>
+
+        <!-- slide 3 -->
+        <div class="slide">
+        <img src="/gui-examples/assets/images/test_image_3.jpeg" alt="Test Image 3" />
+        </div>
+
+        <!-- Control buttons -->
+        <button class="btn btn-next"> > </button>
+        <button class="btn btn-prev"> < </button>
+    </div>
+
+
+    <style>
+        .slider {
+            width: 100%;
+            max-width: 720px;
+            height: 512px;
+            position: relative;
+            overflow: hidden;
+            border-radius: 15px;
+        }
+
+        .slide {
+            width: 100%;
+            max-width: 720px;
+            height: 512px;
+            position: absolute;
+            transition: all 0.5s;
+        }
+
+        .slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .btn {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            padding: 10px;
+            border: none;
+            border-radius: 50%;
+            z-index: 10px;
+            cursor: pointer;
+            background-color: #fff;
+            font-size: 18px;
+        }
+        .btn:active {
+            transform: scale(1.1);
+        }
+        .btn-prev {
+            top: 45%;
+            left: 2%;
+        }
+
+        .btn-next {
+            top: 45%;
+            right: 2%;
+        }
+    </style>
+
+    <script>
+        // Select all slides
+        const slides = document.querySelectorAll(".slide");
+
+        // loop through slides and set each slides translateX
+        slides.forEach((slide, indx) => {
+            slide.style.transform = `translateX(${indx * 100}%)`;
+        });
+
+        // select next slide button
+        const nextSlide = document.querySelector(".btn-next");
+
+        // current slide counter
+        let curSlide = 0;
+        // maximum number of slides
+        let maxSlide = slides.length - 1;
+
+        // add event listener and navigation functionality
+        nextSlide.addEventListener("click", function () {
+        // check if current slide is the last and reset current slide
+        if (curSlide === maxSlide) {
+            curSlide = 0;
+        } else {
+            curSlide++;
+        }
+
+        let perc = 0;
+        let intervalID = setInterval(() => {
+            perc = perc + 1;
+            if(perc > 100) {
+                clearInterval(intervalID);
+                return;
+            }
+
+            // move slide by -100%
+            slides.forEach((slide, indx) => {
+                slide.style.transform = `translateX(${perc * (indx - curSlide)}%)`;
+            });
+        }, 1);
+
+        });
+
+        // select next slide button
+        const prevSlide = document.querySelector(".btn-prev");
+
+        // add event listener and navigation functionality
+        prevSlide.addEventListener("click", function () {
+            // check if current slide is the first and reset current slide to last
+            if (curSlide === 0) {
+                curSlide = maxSlide;
+            } else {
+                curSlide--;
+            }
+            let perc = 0;
+            let intervalID = setInterval(() => {
+                perc = perc + 1;
+                if(perc > 100) {
+                    clearInterval(intervalID);
+                    return;
+                }
+                // move slide by 100%
+                slides.forEach((slide, indx) => {
+                    slide.style.transform = `translateX(${perc * (indx - curSlide)}%)`;
+                });
+            }, 1);
+        
+        });
+    </script>
+
+
+<script type="module">
+
+    import ION from 'ion-3d-engine';
+
+    
+    /* Engine: */
+    const canvas = document.getElementById('viewport');
+    const engine = new ION.Engine({
+        canvas: canvas,
+        fullScreen: true,
+        control: ION.SpaceControl,
+        stats: true,
+        vrEnabled: true,
+    });
+
+
+    /* Slider Component */
+    const sliderRootElement = document.getElementsByClassName('slider')[0];
+    const sliderGuiComponent = new ION.GUIComponent({
+        rootElement: sliderRootElement,
+        ratio: 0.5,
+    });
+    sliderGuiComponent.position.set(0, 3.5, 0);
+    sliderGuiComponent.rotateX(-0.1);
+
+
+    /* Entity */
+    const guiEntity = new ION.Entity();
+    guiEntity.addComponent(sliderGuiComponent);
+    engine.addEntity(guiEntity);
+
+    /* System */
+    const guiSystem = new ION.GUISystem();
+    engine.addSystem(guiSystem);
+
+    /* Changing the Camera default position: */
+    engine.camera.position.z = 4.5;
+    engine.camera.position.y = 3.5;
+
+    /* Engine Start */
+    engine.start();
+
+</script>
+
+    </body>
+</html>

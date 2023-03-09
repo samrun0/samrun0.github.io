@@ -68,7 +68,7 @@
 
     import ION from 'ion-3d-engine';
 
-    
+
     /* Engine: */
     const canvas = document.getElementById('viewport');
     const engine = new ION.Engine({
@@ -84,7 +84,6 @@
     const guiComponent = new ION.GUIComponent({
         rootElement: rootElement,
         ratio: 0.5,
-        transparent: true,
     });
     guiComponent.position.set(0, 3, 0);
     guiComponent.rotateX(-0.07);

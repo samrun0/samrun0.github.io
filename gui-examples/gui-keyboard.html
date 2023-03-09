@@ -176,7 +176,6 @@
     const simpleKeyboardComp = new ION.GUIComponent({
         rootElement: simpleKeyboardElm,
         ratio: 0.5,
-        transparent: true,
     });
     simpleKeyboardComp.position.set(0, 3, 0);
     simpleKeyboardComp.rotateX(-0.4);
@@ -192,7 +191,6 @@
     const keyboardInputComp = new ION.GUIComponent({
         rootElement: keyboardInputElm,
         ratio: 0.5,
-        transparent: true,
     });
     keyboardInputComp.position.set(0, 4, -0.25);
 
@@ -206,8 +204,8 @@
     engine.addSystem(guiSystem);
 
 
-    /* Changing the Camera position: */
-    engine.camera.position.z = 5;
+    /* Changing the Camera default position: */
+    engine.camera.position.z = 4.5;
     engine.camera.position.y = 3.5;
 
 
