@@ -3,9 +3,9 @@
   "version": "1.0.0",
   "description": "ion 3D Engine Website",
   "type": "module",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
-    "start": "nodemon ./index.js localhost 5000",
+    "start": "nodemon ./server.js localhost 3000",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

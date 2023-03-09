@@ -17,6 +17,10 @@ app.get('/', function(req, res) {
     res.sendFile(path.join(__dirname, 'ion-3d-engine.html'));
 });
 
+app.get('/gui-examples/gui-sample.html', function(req, res) {
+    res.sendFile(path.join(__dirname, 'gui-examples', 'gui-sample.html'));
+});
+
 
 app.listen(port, () => {
     console.log(`listening on port ${port}`);

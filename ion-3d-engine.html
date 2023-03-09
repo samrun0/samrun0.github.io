@@ -117,7 +117,6 @@
     font-weight: 700;
 }
 
-
 *,
 *:after,
 *:before {
@@ -214,6 +213,8 @@ html {
   flex-direction: column;
   align-items: flex-end;
   justify-content:flex-end;
+
+  transition: all 0.1s ease-in-out;
 }
 #gallery #images .figure .body {
   display: flex;
@@ -246,6 +247,12 @@ html {
   opacity: 1;
   /* transform: translateY(0); */
 }
+
+.caption:hover {
+    opacity: 0 !important;
+}
+
+
 @media only screen and (max-width: 48rem) {
   #gallery {
     padding: 0;

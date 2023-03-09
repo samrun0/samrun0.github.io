@@ -7,8 +7,16 @@
         <meta name="keywords" content="ion, engine, 3D, three.js, ui, user-interface, vr, ar, virtual reality, webXR">
         <meta name="description" content="ION 3D Engine Example"/>
 
-        <script src="https://unpkg.com/three"></script>
-        <script src="https://unpkg.com/ion-3d-engine"></script>
+        <!-- Since import maps are not yet supported by all browsers, it is necessary to add the polyfill es-module-shims.js. -->
+        <script async src="https://unpkg.com/es-module-shims@1.6.3/dist/es-module-shims.js"></script>
+        <script type="importmap">
+            {
+                "imports": { 
+                    "three": "https://unpkg.com/three@0.150.1/build/three.module.js",
+                    "ion-3d-engine": "https://unpkg.com/ion-3d-engine/dist/ion-3d-engine.module.js"
+                }
+            } 
+        </script>
 
     </head>
 
@@ -18,7 +26,7 @@
 
     <div id='sample' style="width: 400px; height: 250px;">
         <h2>The Sample Element</h2>
-        <p>This is how I appear if you use <a href="https://github.com/samrun0/ion-3D-Engine">ion Engine</a>!</p>
+        <p>This is how I appear if you use <a href="https://samrun0.github.io/ion-3d-engine.html">ion Engine</a>!</p>
         <button class="bbbutton button1" style="background-color: #008CBA; margin-left: 100px;">Start</button>
         <button class="bbbutton button2" style="background-color: #4CAF50; margin-left: 25px;">Engine</button>
 
@@ -55,17 +63,42 @@
     </div>
 
 
+
 <script type="module">
 
-import * as ION from 'ion-3d-engine';
+    import ION from 'ion-3d-engine';
 
-console.log(ION);
+    /* Engine: */
+    const canvas = document.getElementById('viewport');
+    const engine = new ION.Engine({
+        canvas: canvas,
+        fullScreen: true,
+        control: ION.SpaceControl,
+        // stats: false,
+        vrEnabled: true,
+    });
 
-// window.addEventListener('load', () => {
+    /* Sample Component */
+    const rootElement = document.getElementById('sample');
+    const guiComponent = new ION.GUIComponent({
+        rootElement: rootElement,
+        ratio: 0.5,
+        transparent: true,
+    });
+    guiComponent.position.set(0, 3, 0);
+    guiComponent.rotateX(-0.07);
 
-    
-// });
+    /* Entity */
+    const guiEntity = new ION.Entity();
+    guiEntity.addComponent(guiComponent);
+    engine.addEntity(guiEntity);
 
+    /* System */
+    const guiSystem = new ION.GUISystem();
+    engine.addSystem(guiSystem);
+
+    /* Engine Start */
+    engine.start();
 
 </script>
 
