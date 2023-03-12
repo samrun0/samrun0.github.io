@@ -1,7 +1,15 @@
 <!DOCTYPE html>
 <html>
     <head>
+      <title>ION 3D Engine</title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="keywords" content="ion, engine, 3D, three.js, ui, user-interface, vr, ar, virtual reality, webXR">
+        <meta name="description" content="ION 3D Engine"/>
+
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css">
+        <!-- Place this tag in your head or just before your close body tag. -->
+        <script async defer src="https://buttons.github.io/buttons.js"></script>
     </head>
     
 
@@ -27,6 +35,42 @@
                 </li>
               </ul>
 
+              <div class="sidebar-section">
+                <h3> <i class="fa fa-link" aria-hidden="true"></i> Links: </h3>
+
+                <div class="sidebar-links">
+
+                  <div class="sidebar-link">
+                    <i class="fa fa-twitter" aria-hidden="true"></i>
+                    <a href="https://twitter.com/ion3dengine">Twitter</a>
+                  </div>
+
+                  <div class="sidebar-link github-links">
+                    <i class="fa fa-github" aria-hidden="true"></i>
+
+                    <a href="https://github.com/samrun0/ion-3D-Engine">Github</a>
+                  </div>
+
+                  <div class="sidebar-link github-links" style="display:flex; justify-content: center; align-items: center;">
+                    <!-- data-show-count="true" -->
+                    <a class="github-button"
+                      href="https://github.com/samrun0/ion-3D-Engine"
+                      data-icon="octicon-star"
+                      data-size="small"
+                      aria-label="Star ntkme/github-buttons on GitHub">Star</a>
+                    <a class="github-button"
+                      href="https://github.com/samrun0/ion-3D-Engine"
+                      data-icon="octicon-mark-github"
+                      data-size="small"
+                      aria-label="Follow ntkme/github-buttons on GitHub">Follow</a>
+                  </div>
+                  
+                  
+
+                </div>
+                
+              </div>
+
             </div>
 
 
@@ -40,41 +84,41 @@
                 <div id="gallery">
 
                   <div class="example-header">
-                    <h1 class="example-header-headerText">< GUI Examples (HTNL in 3D ) ></h1>
+                    <h1 class="example-header-headerText">< GUI Examples ></h1>
                   </div>
 
                   <div class="images gui-examples">
-                      <div class="figure"><img class="image" src="resources/gui-sample.gif"/>
+                      <div class="figure" data-example-url="https://samrun0.github.io/gui-examples/gui-sample.html" ><img class="image" src="resources/gui-sample.gif"/>
                           <div class="caption">
                           <div class="body">
                               <!-- <div class="number">01</div> -->
                               <!-- <hr/> -->
                               <!-- <p class="text">Title</p> -->
-                              <div class="title">Image Title</div>
+                              <div class="title">GUI Sample HTML</div>
                           </div>
                           </div>
                       </div>
-                      <div class="figure"><img class="image" src="resources/gui-keyboard.gif"/>
+                      <div class="figure" data-example-url="https://samrun0.github.io/gui-examples/gui-keyboard.html" ><img class="image" src="resources/gui-keyboard.gif"/>
                           <div class="caption">
                           <div class="body">
                               <!-- <p class="text">Title</p> -->
-                              <div class="title">Image Title</div>
+                              <div class="title">Keyboard and Input</div>
                           </div>
                           </div>
                       </div>
-                      <div class="figure"><img class="image" src="resources/gui-slider.gif"/>
+                      <div class="figure" data-example-url="https://samrun0.github.io/gui-examples/gui-slider.html" ><img class="image" src="resources/gui-slider.gif"/>
                           <div class="caption">
                           <div class="body">
                               <!-- <p class="text">Title</p> -->
-                              <div class="title">Image Title Image Title Image Title Image Title Image Title Image Title Image Title </div>
+                              <div class="title">Image Slider</div>
                           </div>
                           </div>
                       </div>
-                      <div class="figure"><img class="image" src="resources/reactjs.gif"/>
+                      <div class="figure" data-example-url="https://samrun0.github.io/gui-examples/reactjs/build/index.html" ><img class="image" src="resources/reactjs.gif"/>
                           <div class="caption">
                           <div class="body">
                               <!-- <p class="text">Title</p> -->
-                              <div class="title">Image Title</div>
+                              <div class="title">ReactJS Page</div>
                           </div>
                           </div>
                       </div>
@@ -86,40 +130,7 @@
                   </div>
 
                   <div class="images general-examples">
-                      <div class="figure"><img class="image" src="resources/gui-sample.gif"/>
-                          <div class="caption">
-                          <div class="body">
-                              <!-- <div class="number">01</div> -->
-                              <!-- <hr/> -->
-                              <!-- <p class="text">Title</p> -->
-                              <div class="title">Image Title</div>
-                          </div>
-                          </div>
-                      </div>
-                      <div class="figure"><img class="image" src="resources/gui-keyboard.gif"/>
-                          <div class="caption">
-                          <div class="body">
-                              <!-- <p class="text">Title</p> -->
-                              <div class="title">Image Title</div>
-                          </div>
-                          </div>
-                      </div>
-                      <div class="figure"><img class="image" src="resources/gui-slider.gif"/>
-                          <div class="caption">
-                          <div class="body">
-                              <!-- <p class="text">Title</p> -->
-                              <div class="title">Image Title Image Title Image Title Image Title Image Title Image Title Image Title </div>
-                          </div>
-                          </div>
-                      </div>
-                      <div class="figure"><img class="image" src="resources/reactjs.gif"/>
-                          <div class="caption">
-                          <div class="body">
-                              <!-- <p class="text">Title</p> -->
-                              <div class="title">Image Title</div>
-                          </div>
-                          </div>
-                      </div>
+                      
                   </div>
                     
               
@@ -129,7 +140,78 @@
 
             </div>
 
+
+<script>
+
+  const examples = document.getElementsByClassName('figure');
+
+  for (const example of examples) {
+    example.addEventListener('click', () => {
+      window.open(example.dataset.exampleUrl, '_blank').focus();
+    });
+    
+  }
+
+
+</script>
+
+
 <style>
+
+
+
+.sidebar-section {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  justify-content: start;
+  padding: 10px;
+  color: var(--sidebar-link);
+
+  border-top: 1px solid var(--border-color);
+}
+.sidebar-section > h3 {
+  font-size: 15px;
+  margin-top: 10px;
+  margin-bottom: 4px;
+}
+
+.sidebar-links {
+  width: 100%;
+  /* background-color: #474747; */
+  font-size: 16px !important;
+}
+
+.sidebar-links a{
+  font-size: 15px;
+  color: #749cf9;
+  padding: 4px;
+  padding-bottom: 6px;
+}
+.sidebar-links a:hover{
+  color: var(--action-color-hover);
+}
+.sidebar-links a:visited{
+  color: #749cf9;
+}
+
+.sidebar-section .fa-link{
+  font-size: 12px;
+}
+.sidebar-link > *{
+  margin-right: 7px;
+}
+
+
+
+.sidebar-link{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: start;
+  padding-left: 10px;
+  padding-top: 2px;
+}
 
 
 
@@ -157,7 +239,7 @@
     font-size: 60%;
     width: 100%;
     background-color: #23232383;    
-    padding: 4px;
+    padding: 5px;
     padding-top: 10px;
     padding-bottom: 10px;
     border-top: 1px solid var(--border-color);
