@@ -32,65 +32,100 @@
 
             <div class="app-content">
                 <div class="app-content-header">
-                    <h1 class="app-content-headerText">Examples</h1>
+                    <h1 class="app-content-headerText"><i class="fa fa-angle-double-right" aria-hidden="true"></i> Examples</h1>
                 </div>
 
               <div id="photo-container">
 
                 <div id="gallery">
-                    <div id="images">
-                        <div class="figure"><img class="image" src="https://picsum.photos/1920/1080/?image=75"/>
-                            <div class="caption">
-                            <div class="body">
-                                <!-- <div class="number">01</div> -->
-                                <!-- <hr/> -->
-                                <!-- <p class="text">Title</p> -->
-                                <div class="title">Image Title</div>
-                            </div>
-                            </div>
-                        </div>
-                        <div class="figure"><img class="image" src="https://picsum.photos/1920/1080/?image=83"/>
-                            <div class="caption">
-                            <div class="body">
-                                <!-- <p class="text">Title</p> -->
-                                <div class="title">Image Title</div>
-                            </div>
-                            </div>
-                        </div>
-                        <div class="figure"><img class="image" src="https://picsum.photos/1920/1080/?image=89"/>
-                            <div class="caption">
-                            <div class="body">
-                                <!-- <p class="text">Title</p> -->
-                                <div class="title">Image Title Image Title Image Title Image Title Image Title Image Title Image Title </div>
-                            </div>
-                            </div>
-                        </div>
-                        <div class="figure"><img class="image" src="https://picsum.photos/1920/1080/?image=44"/>
-                            <div class="caption">
-                            <div class="body">
-                                <!-- <p class="text">Title</p> -->
-                                <div class="title">Image Title</div>
-                            </div>
-                            </div>
-                        </div>
-                        <div class="figure"><img class="image" src="https://picsum.photos/1920/1080/?image=38"/>
-                            <div class="caption">
-                            <div class="body">
-                                <!-- <p class="text">Title</p> -->
-                                <div class="title">Image Title</div>
-                            </div>
-                            </div>
-                        </div>
-                        <div class="figure"><img class="image" src="https://picsum.photos/1920/1080/?image=38"/>
-                            <div class="caption">
-                            <div class="body">
-                                <!-- <p class="text">Title</p> -->
-                                <div class="title">Image Title</div>
-                            </div>
-                            </div>
-                        </div>
-                    </div>
+
+                  <div class="example-header">
+                    <h1 class="example-header-headerText">< GUI Examples (HTNL in 3D ) ></h1>
+                  </div>
+
+                  <div class="images gui-examples">
+                      <div class="figure"><img class="image" src="resources/gui-sample.gif"/>
+                          <div class="caption">
+                          <div class="body">
+                              <!-- <div class="number">01</div> -->
+                              <!-- <hr/> -->
+                              <!-- <p class="text">Title</p> -->
+                              <div class="title">Image Title</div>
+                          </div>
+                          </div>
+                      </div>
+                      <div class="figure"><img class="image" src="resources/gui-keyboard.gif"/>
+                          <div class="caption">
+                          <div class="body">
+                              <!-- <p class="text">Title</p> -->
+                              <div class="title">Image Title</div>
+                          </div>
+                          </div>
+                      </div>
+                      <div class="figure"><img class="image" src="resources/gui-slider.gif"/>
+                          <div class="caption">
+                          <div class="body">
+                              <!-- <p class="text">Title</p> -->
+                              <div class="title">Image Title Image Title Image Title Image Title Image Title Image Title Image Title </div>
+                          </div>
+                          </div>
+                      </div>
+                      <div class="figure"><img class="image" src="resources/reactjs.gif"/>
+                          <div class="caption">
+                          <div class="body">
+                              <!-- <p class="text">Title</p> -->
+                              <div class="title">Image Title</div>
+                          </div>
+                          </div>
+                      </div>
+                  </div>
+
+
+                  <div class="example-header">
+                    <h1 class="example-header-headerText">< Examples ></Examples></h1>
+                  </div>
+
+                  <div class="images general-examples">
+                      <div class="figure"><img class="image" src="resources/gui-sample.gif"/>
+                          <div class="caption">
+                          <div class="body">
+                              <!-- <div class="number">01</div> -->
+                              <!-- <hr/> -->
+                              <!-- <p class="text">Title</p> -->
+                              <div class="title">Image Title</div>
+                          </div>
+                          </div>
+                      </div>
+                      <div class="figure"><img class="image" src="resources/gui-keyboard.gif"/>
+                          <div class="caption">
+                          <div class="body">
+                              <!-- <p class="text">Title</p> -->
+                              <div class="title">Image Title</div>
+                          </div>
+                          </div>
+                      </div>
+                      <div class="figure"><img class="image" src="resources/gui-slider.gif"/>
+                          <div class="caption">
+                          <div class="body">
+                              <!-- <p class="text">Title</p> -->
+                              <div class="title">Image Title Image Title Image Title Image Title Image Title Image Title Image Title </div>
+                          </div>
+                          </div>
+                      </div>
+                      <div class="figure"><img class="image" src="resources/reactjs.gif"/>
+                          <div class="caption">
+                          <div class="body">
+                              <!-- <p class="text">Title</p> -->
+                              <div class="title">Image Title</div>
+                          </div>
+                          </div>
+                      </div>
+                  </div>
+                    
+              
                 </div>
+
+              </div>
 
             </div>
 
@@ -98,6 +133,20 @@
 
 
 
+
+.example-header {
+  display: flex;
+  align-items: center;
+  justify-content:center;
+  padding: 5px;
+  margin: 5px;
+}
+.example-header-headerText {
+  color: var(--app-content-main-color);
+  font-size: 15px;
+  /* line-height: 32px; */
+  margin: 0;
+}
 
 
 .text {
@@ -162,14 +211,18 @@ html {
   font-style: italic;
 }
 
-#gallery #images {
+#gallery .images {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
+
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 20px;
+  margin-bottom: 10px;
 }
-#gallery #images .figure {
+#gallery .images .figure {
   position: relative;
   width: 30%;
   aspect-ratio : 1 / 1;
@@ -187,13 +240,13 @@ html {
   border: 1px solid var(--border-color);
 }
 
-#gallery #images .figure:hover{
+#gallery .images .figure:hover{
     border: none !important;
     transition: all 0.7s ease;
 }
 
 
-#gallery #images .figure .image {
+#gallery .images .figure .image {
   position: relative;
   display: block;
   object-fit: cover;
@@ -203,7 +256,7 @@ html {
   transition: all 0.3s ease;
   user-select: none;
 }
-#gallery #images .figure .caption {
+#gallery .images .figure .caption {
   position: absolute;
   top: 0;
   left: 0;
@@ -216,7 +269,7 @@ html {
 
   transition: all 0.1s ease-in-out;
 }
-#gallery #images .figure .body {
+#gallery .images .figure .body {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -227,23 +280,23 @@ html {
 
 
 
-#gallery #images .figure .text {
+#gallery .images .figure .text {
   position: relative;
   opacity: 0;
   /* transform: translateY(5vh); */
   transition: all 0.1s ease-in-out;
   transition-delay: 0.0s;
 }
-#gallery #images .figure hr {
+#gallery .images .figure hr {
   width: 50%;
   border: 0;
   border-bottom: 4px solid rgba(255,255,255,0.2);
 }
-#gallery #images .figure:hover .image {
+#gallery .images .figure:hover .image {
   opacity: 0.9;
   transform: scale3d(1.2, 1.2, 1.2);
 }
-#gallery #images .figure:hover .text {
+#gallery .images .figure:hover .text {
   opacity: 1;
   /* transform: translateY(0); */
 }
@@ -257,7 +310,7 @@ html {
   #gallery {
     padding: 0;
   }
-  #gallery #images .figure {
+  #gallery .images .figure {
     width: 46vw;
   }
 }
@@ -265,10 +318,10 @@ html {
   #gallery {
     padding: 0;
   }
-  #gallery #images {
+  #gallery .images {
     flex-direction: column;
   }
-  #gallery #images .figure {
+  #gallery .images .figure {
     width: 100%;
     margin: 0.5vh 0;
   }
@@ -472,7 +525,6 @@ body {
 }
 
 .app-content {
-    
   padding: 16px;
   background-color: var(--app-bg);
   /* height: 100%; */
@@ -487,7 +539,9 @@ body {
   align-items: center;
   justify-content: space-between;
   padding: 0 4px;
-  margin-bottom: 10px;
+  padding-bottom: 10px;
+  margin-bottom: 5px;
+  border-bottom: 1px solid var(--border-color);
 }
 .app-content-headerText {
   color: var(--app-content-main-color);
